@@ -1,6 +1,6 @@
 # Python-API-challenge_WeatherPy_VacationPy
 
-### This challenge includes two parts:
+This challenge includes two parts:
 
 ## Part I - WeatherPy
 
@@ -10,7 +10,7 @@
 
 * The second requirement is to run linear regression on each relationship for the northern and southern hemispheres.
 
-### Your final notebook must:
+### Your notebook must:
 
 * Randomly select at least 500 unique (non-repeat) cities based on latitude and longitude.
 * Perform a weather check on each of the cities using a series of successive API calls.
@@ -61,6 +61,7 @@ lat_range = (-90, 90)
 lng_range = (-180, 180)
 ```
 #### Generate cities list
+
 ```python
 # List for holding lat_lngs and cities
 lat_lngs = []
@@ -82,9 +83,10 @@ for lat_lng in lat_lngs:
 # Print the city count to confirm sufficient count
 len(cities)
 ```
-#### There are 626 cities in the study.
+* There are 626 cities in the study.
 
 #### Perform API Calls
+
 ```python
 # URL for GET requests to retrieve city data
 url = "http://api.openweathermap.org/data/2.5/weather?"
@@ -173,6 +175,7 @@ cities_df
 ![](https://github.com/poonam-ux/Python-API-challenge_WeatherPy_VacationPy/blob/main/WeatherPy/output_data/cities_df.png)
 
 #### Inspect the data and remove the cities where the humidity > 100%
+
 ```python
 #check if there are any cities with Humidity >100% 
 cities_df["Humidity"].describe()
@@ -190,9 +193,10 @@ clean_city_data
 ```
 ![](https://github.com/poonam-ux/Python-API-challenge_WeatherPy_VacationPy/blob/main/WeatherPy/output_data/clean_city_data.png)
 
-#### Plotting the data
+## Plotting the data
 
 #### Latitude vs Max Temp (F)
+
 ```python
 date_now = datetime.date(datetime.now())
 
@@ -214,6 +218,7 @@ plt.show()
 ![](https://github.com/poonam-ux/Python-API-challenge_WeatherPy_VacationPy/blob/main/WeatherPy/output_data/latitude_vs_max_temp.png)
 
 #### Latitude vs Humidity
+
 ```python
 x_values = clean_city_data["Lat"]
 y_values = clean_city_data["Humidity"]
@@ -232,6 +237,7 @@ plt.show()
 ![](https://github.com/poonam-ux/Python-API-challenge_WeatherPy_VacationPy/blob/main/WeatherPy/output_data/latitude_vs_humidity.png)
 
 #### Latitude vs Cloudiness
+
 ```python
 # Create a scatter plot for latitude vs cloudiness.
 x_values = clean_city_data["Lat"]
@@ -252,6 +258,7 @@ plt.show()
 ![](https://github.com/poonam-ux/Python-API-challenge_WeatherPy_VacationPy/blob/main/WeatherPy/output_data/latitude_vs_cloudiness.png)
 
 #### Latitude vs Wind Speed
+
 ```python
 # Create a scatter plot for latitude vs wind speed.
 x_values = clean_city_data["Lat"]
@@ -273,6 +280,7 @@ plt.show()
 ![](https://github.com/poonam-ux/Python-API-challenge_WeatherPy_VacationPy/blob/main/WeatherPy/output_data/latitude_vs_wind_speed.png)
 
 #### Linear Regression
+
 ```python
 # Create a function to create Linear Regression plots for remaining activities
 def plot_linear_regression(x_values, y_values, x_label, y_label, hemisphere, text_coordinates, ylim=None):
@@ -308,6 +316,7 @@ northern_hemi_weather_df = clean_city_data.loc[clean_city_data["Lat"] >= 0]
 southern_hemi_weather_df = clean_city_data.loc[clean_city_data["Lat"] < 0]
 ```
 #### Northern hemisphere - Lat vs Max Temp (F)
+
 ```python
 # Create a scatter plot for latitude vs max temp (northern hemisphere)
 x_values = northern_hemi_weather_df["Lat"]
@@ -318,11 +327,13 @@ plot_linear_regression(x_values, y_values, "Latitude", "Max Temp (F)", "Northern
 plt.savefig("./output_data/northern_hem_linear_lat_vs_max_temp.png", bbox_inches="tight")
 plt.show()
 ```
-##### The r-squared is: 0.7485887373160589
-##### The correlation between both factors is -0.87
+* The r-squared is: 0.7485887373160589
+* The correlation between both factors is -0.87
+
 ![](https://github.com/poonam-ux/Python-API-challenge_WeatherPy_VacationPy/blob/main/WeatherPy/output_data/northern_hem_linear_lat_vs_max_temp.png)
 
 #### Southerm hemisphere - Lat vs Max Temp
+
 ```python
 # Create a scatter plot for latitude vs cloudiness (southern hemisphere)
 x_values = southern_hemi_weather_df["Lat"]
@@ -335,9 +346,10 @@ plt.show()
 ```
 ![](https://github.com/poonam-ux/Python-API-challenge_WeatherPy_VacationPy/blob/main/WeatherPy/output_data/southern_hem_linear_lat_vs_max_temp.png)
 
-#### The correlation between latitude and maximum temperature is strong for both the hemispheres. It is higher for northern hemisphere (0.87), indicating that as we move away from the equator, the maximum temperature keeps dropping in a more linear manner.
+* The correlation between latitude and maximum temperature is strong for both the hemispheres. It is higher for northern hemisphere (0.87), indicating that as we move away from the equator, the maximum temperature keeps dropping in a more linear manner.
 
 #### Northern hemisphere - Lat vs Humidity
+
 ```python
 # Create a scatter plot for latitude vs humditiy (northern hemisphere)
 x_values = northern_hemi_weather_df['Lat']
@@ -349,6 +361,7 @@ plt.show()
 ![](https://github.com/poonam-ux/Python-API-challenge_WeatherPy_VacationPy/blob/main/WeatherPy/output_data/northern_hem_linear_lat_vs_humidity.png)
 
 #### Southern hemisphere - Lat vs Humidity
+
 ```python
 # Create a scatter plot for latitude vs humditiy (southern hemisphere)
 x_values = southern_hemi_weather_df['Lat']
@@ -359,9 +372,10 @@ plt.show()
 ```
 ![](https://github.com/poonam-ux/Python-API-challenge_WeatherPy_VacationPy/blob/main/WeatherPy/output_data/southern_hem_linear_lat_vs_humudity.png)
 
-#### There is no correlation between latitude and humidity for southern hemisphere (0.3). For northern hemisphere, it is the same case, expect for the higher latitudes, where we can see some correlation (but not very strong).
+* There is no correlation between latitude and humidity for southern hemisphere (0.3). For northern hemisphere, it is the same case, expect for the higher latitudes, where we can see some correlation (but not very strong).
 
 #### Northern hemisphere - Lat vs Cloudiness
+
 ```python
 # Create a scatter plot for latitude vs cloudiness (northern hemisphere)
 x_values = northern_hemi_weather_df['Lat']
@@ -374,6 +388,7 @@ plt.show()
 ![](https://github.com/poonam-ux/Python-API-challenge_WeatherPy_VacationPy/blob/main/WeatherPy/output_data/northern_hem_linear_lat_vs_cloudiness.png)
 
 #### Southern hemisphere - Lat vs Cloudiness
+
 ```python
 # Create a scatter plot for latitude vs cloudiness (southern hemisphere)
 x_values = southern_hemi_weather_df['Lat']
@@ -384,9 +399,10 @@ plt.show()
 ```
 ![](https://github.com/poonam-ux/Python-API-challenge_WeatherPy_VacationPy/blob/main/WeatherPy/output_data/southern_hem_linear_lat_vs_cloudiness.png)
 
-#### There is no correlation between latitude and cloudiness for both, southern and northern hemispheres. Both show scattered values all over the plots.
+* There is no correlation between latitude and cloudiness for both, southern and northern hemispheres. Both show scattered values all over the plots.
 
 #### Northern hemisphere - Lat vs Wind Speed
+
 ```python
 # Create a scatter plot for latitude vs wind speed(northern hemisphere)
 x_values = northern_hemi_weather_df['Lat']
@@ -398,6 +414,7 @@ plt.show()
 ![](https://github.com/poonam-ux/Python-API-challenge_WeatherPy_VacationPy/blob/main/WeatherPy/output_data/northern_hem_linear_lat_vs_wind_speed.png)
 
 #### Southern hemisphere - Lat vs Wind Speed
+
 ```python
 # Create a scatter plot for latitude vs wind speed (southern hemisphere)
 x_values = southern_hemi_weather_df['Lat']
@@ -408,15 +425,17 @@ plt.show()
 ```
 ![](https://github.com/poonam-ux/Python-API-challenge_WeatherPy_VacationPy/blob/main/WeatherPy/output_data/southern_hem_linear_lat_vs_wind_speed.png)
 
-#### The r-squared is: 0.006068987073174655
-#### The correlation between both factors is -0.08
+* The r-squared is: 0.006068987073174655
+* The correlation between both factors is -0.08
 
-#### There is no correlation between latitude and wind speed either, for both hemispheres. Both show evenly scattered values over the latitudes.
+* There is no correlation between latitude and wind speed either, for both hemispheres. Both show evenly scattered values over the latitudes.
 
 ## VacationPy Images
 
-### Heat Layer on Google maps for cities in Part I
+* Heat Layer on Google maps for cities in Part I
+
 ![](https://github.com/poonam-ux/Python-API-challenge_WeatherPy_VacationPy/blob/main/VacationPy/output_data/heat_layer_weather_map.png)
 
-### Hotels marked on Google Maps
+* Hotels marked on Google Maps
+
 ![](https://github.com/poonam-ux/Python-API-challenge_WeatherPy_VacationPy/blob/main/VacationPy/output_data/hotels_vacation_map.png)
