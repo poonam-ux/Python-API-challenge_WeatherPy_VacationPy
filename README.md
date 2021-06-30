@@ -10,7 +10,7 @@ This challenge includes two parts:
 
 * The second requirement is to run linear regression on each relationship for the northern and southern hemispheres.
 
-### Your notebook must:
+### Steps to follow:
 
 * Randomly select at least 500 unique (non-repeat) cities based on latitude and longitude.
 * Perform a weather check on each of the cities using a series of successive API calls.
